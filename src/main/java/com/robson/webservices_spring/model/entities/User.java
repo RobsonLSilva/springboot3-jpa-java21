@@ -1,14 +1,19 @@
 package com.robson.webservices_spring.model.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-
+@Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Para dizer que o campo id é auto incremental
     private Long id;
     private String name;
     private String email;
