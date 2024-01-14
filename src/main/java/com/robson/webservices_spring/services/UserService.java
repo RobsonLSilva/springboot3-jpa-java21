@@ -1,7 +1,7 @@
 package com.robson.webservices_spring.services;
 
-import com.robson.webservices_spring.model.entities.User;
-import com.robson.webservices_spring.model.repositories.UserRepository;
+import com.robson.webservices_spring.entities.User;
+import com.robson.webservices_spring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
