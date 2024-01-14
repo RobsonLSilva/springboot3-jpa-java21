@@ -2,7 +2,14 @@ package com.robson.webservices_spring.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.robson.webservices_spring.entities.enums.OrderStatus;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -89,5 +96,13 @@ public class Order implements Serializable {
         return id != null ? id.hashCode() : 0;
     }
 
-
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", moment=" + moment +
+                ", orderStatus=" + orderStatus +
+                ", client=" + client +
+                '}';
+    }
 }
