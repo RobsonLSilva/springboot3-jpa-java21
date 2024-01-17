@@ -5,6 +5,7 @@ import com.robson.webservices_spring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,5 +20,12 @@ public class UserService {
     public User findById(Long id){
         Optional<User> user = repository.findById(id);
         return user.get();
+    }
+    public User save(User obj){
+        if (obj != null) {
+            return repository.save(obj);
+        } else {
+            throw new IllegalArgumentException("Parametro Nulo verifique..");
+        }
     }
 }
