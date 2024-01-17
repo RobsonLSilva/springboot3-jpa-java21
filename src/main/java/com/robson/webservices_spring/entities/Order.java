@@ -95,6 +95,15 @@ public class Order implements Serializable {
         return items;
     }
 
+    public double total(){
+        double sum = 0.0;
+
+        for (OrderItem item : items){
+            sum += item.getSubTotal();
+        }
+        return sum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,6 +118,9 @@ public class Order implements Serializable {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
+
+
 
     @Override
     public String toString() {
