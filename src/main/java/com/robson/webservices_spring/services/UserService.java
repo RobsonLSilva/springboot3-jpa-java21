@@ -22,10 +22,10 @@ public class UserService {
         return user.get();
     }
     public User save(User obj){
-        if (obj != null) {
-            return repository.save(obj);
-        } else {
-            throw new IllegalArgumentException("Parametro Nulo verifique..");
-        }
+       return repository.save(obj);
+    }
+
+    public void delete(Long id){
+        repository.deleteById(id);
     }
 }
