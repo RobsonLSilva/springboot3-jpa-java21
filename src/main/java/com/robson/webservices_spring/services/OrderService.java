@@ -2,6 +2,7 @@ package com.robson.webservices_spring.services;
 
 import com.robson.webservices_spring.entities.Order;
 import com.robson.webservices_spring.repositories.OrderRepository;
+import com.robson.webservices_spring.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,6 @@ public class OrderService {
     }
     public Order findById(Long id){
         Optional<Order> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 }

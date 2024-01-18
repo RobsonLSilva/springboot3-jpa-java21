@@ -2,6 +2,7 @@ package com.robson.webservices_spring.services;
 
 import com.robson.webservices_spring.entities.Product;
 import com.robson.webservices_spring.repositories.ProductRepository;
+import com.robson.webservices_spring.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,6 @@ public class ProductService {
     }
     public Product findById(Long id){
         Optional<Product> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 }
