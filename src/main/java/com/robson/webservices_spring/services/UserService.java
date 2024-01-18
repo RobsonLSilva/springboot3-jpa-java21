@@ -2,11 +2,13 @@ package com.robson.webservices_spring.services;
 
 import com.robson.webservices_spring.entities.User;
 import com.robson.webservices_spring.repositories.UserRepository;
+import com.robson.webservices_spring.services.exceptions.DatabaseException;
 import com.robson.webservices_spring.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,12 +24,18 @@ public class UserService {
         Optional<User> user = repository.findById(id);
         return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
-    public User save(User obj){
+    public User insert(User obj){
        return repository.save(obj);
     }
 
     public void delete(Long id){
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e){
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public User update(Long id, User obj){
